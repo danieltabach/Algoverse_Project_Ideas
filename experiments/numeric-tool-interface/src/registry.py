@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass
 
 
@@ -13,7 +14,7 @@ class ModelConfig:
     api_base: str | None = None
 
 
-OLLAMA_BASE = "http://localhost:11434/v1"
+OLLAMA_BASE = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434/v1")
 
 MODELS = {
     "qwen3-8b": ModelConfig("openai", "qwen3:8b", "Qwen3 8B", OLLAMA_BASE),

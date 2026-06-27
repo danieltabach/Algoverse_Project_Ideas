@@ -70,6 +70,8 @@ pip install -r requirements.txt
 python src\clean_layer2.py --config configs\clean_core\clean_core_threshold_boundary_v2.json --dry-run --model qwen3-8b --runs 1
 ```
 
+Docker is also supported for the runnable experiment; see `experiments/numeric-tool-interface/README.md` for the beginner-friendly Docker commands and `OLLAMA_BASE_URL` explanation.
+
 Inspect committed summary results:
 
 ```powershell

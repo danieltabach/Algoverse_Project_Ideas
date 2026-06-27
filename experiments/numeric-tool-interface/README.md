@@ -258,6 +258,96 @@ Default model keys are defined in `src/registry.py`, including:
 
 If your local model names differ, edit `MODELS` in `src/registry.py`.
 
+
+## Running With Docker
+
+Docker lets teammates run the same Python environment without manually installing Python packages on their machine. In this setup, Docker runs the experiment code, while Ollama usually runs on the host machine outside Docker.
+
+Why Ollama stays outside Docker:
+
+- model weights are large,
+- many teammates already use Ollama locally,
+- the experiment container only needs to call Ollama's OpenAI-compatible HTTP endpoint.
+
+Build the container:
+
+```powershell
+cd experiments\numeric-tool-interface
+docker compose build
+```
+
+Run a dry-run, which does not call any model:
+
+```powershell
+docker compose run --rm experiment python src\clean_layer2.py --config configs\clean_core\clean_core_threshold_boundary_v2.json --dry-run --model qwen3-8b --runs 1
+```
+
+Run the summary notebook environment from Docker:
+
+```powershell
+docker compose run --rm --service-ports experiment jupyter notebook --ip=0.0.0.0 --port=8888 --allow-root notebooks\clean_core_summary_analysis.ipynb
+```
+
+Run a live model call:
+
+```powershell
+docker compose run --rm experiment python src\clean_layer2.py --config configs\clean_core\clean_core_threshold_boundary_v2.json --model qwen3-8b --runs 1 --limit 5
+```
+
+Before live model calls, make sure Ollama is running on the host and the model exists:
+
+```powershell
+ollama pull qwen3:8b
+ollama serve
+```
+
+### Environment Variables
+
+An environment variable is a runtime setting. Instead of hard-coding a value in Python, the program asks the operating system, "was this setting provided?" If yes, it uses that value. If not, it uses a default.
+
+This project uses one environment variable:
+
+```text
+OLLAMA_BASE_URL
+```
+
+Outside Docker, the default is:
+
+```text
+http://localhost:11434/v1
+```
+
+Inside Docker, `localhost` means "inside the container," not your laptop. So `docker-compose.yml` sets:
+
+```text
+OLLAMA_BASE_URL=http://host.docker.internal:11434/v1
+```
+
+That tells the container to call Ollama running on your host machine.
+
+You usually do not need to change this on Docker Desktop for Windows/macOS. If your Ollama server is somewhere else, copy `.env.example` to `.env` and edit the URL:
+
+```powershell
+copy .env.example .env
+```
+
+Example `.env`:
+
+```text
+OLLAMA_BASE_URL=http://host.docker.internal:11434/v1
+```
+
+### Reproducibility Boundary
+
+Docker freezes the Python environment, code, configs, and commands. It does not freeze the external model runtime. Exact live outputs can still vary with:
+
+- Ollama version,
+- model tag or quantization,
+- hardware,
+- nondeterminism in the local inference stack.
+
+For exact paper artifacts, keep the committed summary CSVs and archive full raw outputs separately.
+
 ## Limitations
 
 - The experiments are synthetic micro-tasks.
