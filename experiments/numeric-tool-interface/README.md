@@ -1,14 +1,36 @@
 # Numeric Tool-Interface Semantics
 
-## Research Question
+Difficulty: **Easy-Medium**
 
-Do numeric tool interfaces change how language models convert vague instructions such as "slightly increase c" into concrete tool-call arguments?
+Compute Budget: **Low** for local 8B-12B models; **Low-Medium** if adding frontier model replications.
 
-The core claim being tested is:
+## Pitch
 
-> Tool schemas are not neutral measurement instruments. Numeric state, sibling fields, schema ranges, and relational rules can change the numeric value emitted by an LLM tool call.
+Tool schemas may not be neutral wrappers around model intent. When an agent is asked to "slightly increase c," the numeric argument it emits may depend on the current values shown in the prompt, the schema bounds on sibling parameters, whether a relational rule is written in the tool description or user prompt, and whether sibling parameters are required. This project treats numeric tool arguments as behavioral measurements: if the same request produces different `c` values under different interface designs, then tool design is part of the agent's action policy, not just an implementation detail.
 
-This package contains the clean-core version of the experiment. It is designed to avoid earlier mechanism-confounded setups where prompt-visible values and schema ranges predicted the same output.
+Concrete experiments:
+
+- Test whether adding a written rule such as `a+b+c >= 1.0` changes `c_output` relative to a matched no-rule interface.
+- Move the required minimum for `c` by changing current `a,b` values and test whether model outputs track the moving floor.
+- Create disagreement between prompt-visible current values and schema-implied ranges to see which source the model follows.
+- Remove prompt-visible state and test whether schema metadata alone can create a numeric floor.
+- Move the rule between tool description, user prompt, both, and neither to separate tool-metadata effects from ordinary prompt instruction following.
+- Compare no-word baselines to vague-word prompts to ask whether words add signal beyond the interface-induced default.
+
+## What This Is And Is Not
+
+This is a tool-use evaluation paper, not a claim that tools mechanically enforce constraints.
+
+Correct framing:
+
+> Do tool-interface choices change the numeric actions emitted by LLM tool calls?
+
+Your proposed framing is mostly right, with two corrections:
+
+- **Prompt vs schema alignment:** yes, the experiments ask whether the prompt, schema, or both are more behaviorally active. But the current results are model-specific; do not claim that schema always wins.
+- **Defaults and sibling parameters:** yes, the broader harness supports defaults, required sibling fields, parameter names, and order. The packaged clean-core focuses on the strongest five mechanism tests; the wider local project has more confounder runs.
+- **Baseline/no-word vs words:** yes. The no-word condition is important because it tells us whether a vague word actually moves the model away from its default increase behavior.
+- **Downstream impacts:** the clean-core experiment measures immediate numeric tool-call outputs. Downstream impact is a motivation and paper implication, not directly measured here unless we add a downstream simulator.
 
 ## Current Status
 
@@ -19,6 +41,7 @@ Included:
 - PowerShell launch script.
 - Progress snapshot script.
 - Summary CSVs from local clean-core runs.
+- A summary-results notebook that works from committed summary CSVs.
 
 Not included:
 
@@ -40,11 +63,12 @@ Not included:
 | `scripts/run_clean_core_v2.ps1` | Runs the five clean-core configs across selected models. |
 | `scripts/progress_snapshot.py` | Computes resume-aware progress for the packaged clean-core manifest. |
 | `configs/clean_core/manifest_v2.json` | Defines the clean-core launch/read order. |
-| `results/summary/` | Curated summary CSVs. These are small enough for GitHub and useful for team review. |
+| `results/summary/` | Curated summary CSVs committed for review. |
+| `notebooks/clean_core_summary_analysis.ipynb` | Lightweight notebook that reads summary CSVs only. |
 
 ## Experiment Design
 
-Each run gives the model a prompt and a tool schema. The model emits a tool call with numeric arguments, usually `a`, `b`, and `c`. The harness records the raw arguments and computes diagnostics afterward.
+Each run gives the model a prompt and a tool schema. The model emits a tool call with numeric arguments, usually `a`, `b`, and `c`. The harness records raw arguments and computes diagnostics afterward.
 
 Important design rule:
 
@@ -63,35 +87,21 @@ The clean-core package preserves five experiment types. Each has one config file
 
 ### 1. Total Requirement Changes C
 
-Config:
+Config: `configs/clean_core/clean_core_threshold_boundary_v2.json`
 
-```text
-configs/clean_core/clean_core_threshold_boundary_v2.json
-```
-
-Summary:
-
-```text
-results/summary/clean_core_threshold_boundary_v2_summary.csv
-```
+Summary: `results/summary/clean_core_threshold_boundary_v2_summary.csv`
 
 Question:
 
 > Does adding the written total-at-least-1.0 requirement change `c` compared with the same prompt without that requirement?
 
-Example pair:
+Example:
 
 ```text
 Current values: a=0.31, b=0.23, c=0.36. Only change c. Slightly increase c.
 ```
 
-Without total rule, this is a normal increase request. With the total rule, the model is also told:
-
-```text
-The total of a, b, and c should be greater than or equal to 1.0.
-```
-
-Since `1.0 - .31 - .23 = .46`, a threshold-aware output should move `c` to at least `.46`, while still keeping `a` and `b` unchanged.
+Since `1.0 - .31 - .23 = .46`, a threshold-aware output should move `c` to at least `.46`, while keeping `a` and `b` unchanged.
 
 Primary metrics:
 
@@ -102,17 +112,9 @@ Primary metrics:
 
 ### 2. Required C Minimum Moves
 
-Config:
+Config: `configs/clean_core/clean_core_floor_gradient_v2.json`
 
-```text
-configs/clean_core/clean_core_floor_gradient_v2.json
-```
-
-Summary:
-
-```text
-results/summary/clean_core_floor_gradient_v2_summary.csv
-```
+Summary: `results/summary/clean_core_floor_gradient_v2_summary.csv`
 
 Question:
 
@@ -130,23 +132,15 @@ The strongest evidence is monotonic movement in median `c_output` as the floor r
 
 ### 3. Prompt Values vs Tool Schema
 
-Config:
+Config: `configs/clean_core/clean_core_mechanism_split_v2.json`
 
-```text
-configs/clean_core/clean_core_mechanism_split_v2.json
-```
-
-Summary:
-
-```text
-results/summary/clean_core_mechanism_split_v2_summary.csv
-```
+Summary: `results/summary/clean_core_mechanism_split_v2_summary.csv`
 
 Question:
 
 > If prompt-visible current values and tool schema ranges imply different `c` floors, which source does the model follow?
 
-This is the clean mechanism split:
+Clean split:
 
 ```text
 Prompt-visible current values: a=.24, b=.16 -> prompt floor=.60
@@ -157,51 +151,25 @@ Outputs near `.60` suggest prompt-visible arithmetic. Outputs near `.39` suggest
 
 ### 4. Tool Schema Alone
 
-Config:
+Config: `configs/clean_core/clean_core_schema_only_v2.json`
 
-```text
-configs/clean_core/clean_core_schema_only_v2.json
-```
-
-Summary:
-
-```text
-results/summary/clean_core_schema_only_v2_summary.csv
-```
+Summary: `results/summary/clean_core_schema_only_v2_summary.csv`
 
 Question:
 
 > Without prompt-visible current values, can schema ranges plus the written total rule create a visible `c` floor?
 
-The three key cases are:
-
-| Case | Tool ranges | Total rule |
-| --- | --- | --- |
-| Open schema threshold | `a,b,c` in `[0,1]` | Present |
-| Tight schema no-rule | `a<=.43`, `b<=.18` | Absent |
-| Tight schema threshold | `a<=.43`, `b<=.18` | Present |
-
 The clean schema-floor signal is `.39` appearing mainly when tight ranges and the total rule are both present.
 
 ### 5. Rule Location
 
-Config:
+Config: `configs/clean_core/clean_core_rule_location_v2.json`
 
-```text
-configs/clean_core/clean_core_rule_location_v2.json
-```
-
-Summary:
-
-```text
-results/summary/clean_core_rule_location_v2_summary.csv
-```
+Summary: `results/summary/clean_core_rule_location_v2_summary.csv`
 
 Question:
 
 > Does the model behave differently when the total rule is written in the tool description, the user prompt, both places, or neither place?
-
-This separates ordinary prompt instruction following from tool-metadata sensitivity.
 
 Interpretation:
 
@@ -210,7 +178,7 @@ Interpretation:
 - Both works best: salience or repetition may matter.
 - Neither works: likely numeric anchoring or baseline behavior.
 
-## Summary Readout
+## Existing Results
 
 The high-level readout file is:
 
@@ -218,15 +186,28 @@ The high-level readout file is:
 results/summary/clean_core_signal_summary.csv
 ```
 
-Current local summary:
+Current summary:
 
 - The moving-floor effect is visible across the three primary local models.
 - Schema-only effects are model-specific and should be framed cautiously.
 - Rule-location behavior includes abstentions in some cells, so those cells need careful interpretation.
 
-Do not overclaim that all models use schema ranges. A safer claim is:
+A safe current claim is:
 
-> The clean-core results show that numeric interface structure can change tool-call arguments, but the source of the effect differs by model and condition.
+> Numeric interface structure changes tool-call arguments, but the source of the effect differs by model and condition.
+
+Do not overclaim that all models use schema ranges.
+
+## Inspecting Results
+
+Open the summary notebook:
+
+```powershell
+cd experiments\numeric-tool-interface
+jupyter notebook notebooks\clean_core_summary_analysis.ipynb
+```
+
+The notebook reads committed files under `results/summary/` and does not require raw JSONL outputs.
 
 ## Running The Experiments
 
@@ -277,19 +258,6 @@ Default model keys are defined in `src/registry.py`, including:
 
 If your local model names differ, edit `MODELS` in `src/registry.py`.
 
-## Output Files
-
-Live runs write:
-
-```text
-results/raw/*.jsonl
-results/raw/*.csv
-results/summary/*_summary.csv
-logs/
-```
-
-This repository ignores raw outputs and logs by default. Summary CSVs are kept because they are compact and useful for review.
-
 ## Limitations
 
 - The experiments are synthetic micro-tasks.
@@ -297,4 +265,4 @@ This repository ignores raw outputs and logs by default. Summary CSVs are kept b
 - Small open-weight models may not match frontier model behavior.
 - Current summaries are preliminary local readouts, not a final frozen paper artifact.
 - Full raw outputs are not committed to this repository.
-
+- Downstream impacts are not directly simulated in this clean-core package.
