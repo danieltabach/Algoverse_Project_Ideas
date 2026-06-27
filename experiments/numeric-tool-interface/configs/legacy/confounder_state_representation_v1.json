@@ -1,0 +1,24 @@
+{
+  "batch_id": "confounder_state_representation_v1",
+  "description": "Diagnostic sweep testing prompt state versus schema defaults and required versus optional sibling fields. Initial aligned context only; follow with mechanism_identification_v1_light before claiming schema-bound propagation.",
+  "models": ["primary"],
+  "n_runs": 10,
+  "temperature": 0.0,
+  "word_set": "calibration",
+  "conditions": ["threshold_gte_1"],
+  "state_variants": [
+    "prompt_state_required",
+    "schema_default_required",
+    "schema_default_optional",
+    "prompt_state_optional",
+    "no_state_required"
+  ],
+  "contexts": [
+    {"context_id": "ab_50_15_c_25", "a": 0.5, "b": 0.15, "c": 0.25}
+  ],
+  "c_grid": [0.25],
+  "prompt_template": "with_baseline_only_change_c",
+  "rule_location": "tool_description",
+  "parameter_order": ["a", "b", "c"],
+  "result_file": "results/raw/confounder_state_representation_v1.jsonl"
+}

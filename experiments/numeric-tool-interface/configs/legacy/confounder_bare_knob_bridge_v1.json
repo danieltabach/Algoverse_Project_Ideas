@@ -1,0 +1,41 @@
+{
+  "batch_id": "confounder_bare_knob_bridge_v1",
+  "description": "Confounder 10: bare-knob bridge using a one-parameter set_c(c) tool with the same prompt-state baselines. Compare externally to multi-parameter no-rule batches.",
+  "models": [
+    "primary"
+  ],
+  "n_runs": 20,
+  "temperature": 0.0,
+  "word_set": "minimal",
+  "conditions": [
+    "bare_c_no_rule"
+  ],
+  "state_variants": [
+    "prompt_state_optional"
+  ],
+  "contexts": [
+    {
+      "context_id": "ab_50_15",
+      "a": 0.5,
+      "b": 0.15
+    },
+    {
+      "context_id": "ab_30_15",
+      "a": 0.3,
+      "b": 0.15
+    }
+  ],
+  "c_grid": [
+    0.25,
+    0.35,
+    0.55
+  ],
+  "prompt_template": "with_baseline_only_change_c",
+  "rule_location": "none",
+  "parameter_order": [
+    "c"
+  ],
+  "run_order": "randomized",
+  "random_seed": 20260624,
+  "result_file": "results/raw/confounder_bare_knob_bridge_v1.jsonl"
+}

@@ -55,6 +55,8 @@ Current status:
 - Runnable Python harness.
 - Clean-core configs for five mechanism tests.
 - Extended summary CSVs from earlier experiment families, including parameter order, schema defaults, prompt placement, threshold gradients, and confounder checks.
+- Dense experiment menu at `experiments/numeric-tool-interface/docs/EXPERIMENT_MENU.md`.
+- Historical configs preserved under `experiments/numeric-tool-interface/configs/legacy/`.
 - Summary-analysis notebook that works from committed CSVs.
 - Docker support for reproducible Python setup.
 
@@ -124,10 +126,11 @@ docker compose build
 docker compose run --rm experiment python src\clean_layer2.py --config configs\clean_core\clean_core_threshold_boundary_v2.json --dry-run --model qwen3-8b --runs 1
 ```
 
-Inspect committed summary results:
+Inspect the experiment menu and committed summary results:
 
 ```powershell
 cd experiments\numeric-tool-interface
+Get-Content docs\EXPERIMENT_MENU.md
 jupyter notebook notebooks\clean_core_summary_analysis.ipynb
 ```
 

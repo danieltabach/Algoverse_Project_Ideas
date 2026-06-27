@@ -1,0 +1,47 @@
+{
+  "batch_id": "experiment_f_schema_bound_threshold_v1",
+  "description": "Experiment F: schema-bound threshold propagation with no prompt baseline. Tight schema implies C floor .35 only when the threshold rule is present.",
+  "models": [
+    "primary"
+  ],
+  "temperature": 0.0,
+  "prompt_template": "no_baseline",
+  "rule_location": "tool_description",
+  "parameter_order": [
+    "a",
+    "b",
+    "c"
+  ],
+  "run_order": "randomized",
+  "random_seed": 20260624,
+  "n_runs": 30,
+  "words": [
+    "",
+    "slightly",
+    "moderately",
+    "drastically"
+  ],
+  "conditions": [
+    "schema_open_threshold",
+    "schema_tight_threshold",
+    "schema_tight_no_rule"
+  ],
+  "state_variants": [
+    "no_state_required"
+  ],
+  "contexts": [
+    {
+      "context_id": "schema_only_no_prompt_state",
+      "a": null,
+      "b": null,
+      "c": null,
+      "c_grid": [
+        null
+      ]
+    }
+  ],
+  "c_grid": [
+    null
+  ],
+  "result_file": "results/raw/experiment_f_schema_bound_threshold_v1.jsonl"
+}

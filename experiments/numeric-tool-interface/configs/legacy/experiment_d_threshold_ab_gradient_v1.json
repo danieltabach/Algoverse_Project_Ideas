@@ -1,0 +1,80 @@
+{
+  "batch_id": "experiment_d_threshold_ab_gradient_v1",
+  "description": "Experiment D: threshold A/B context gradient. Tests whether C tracks 1-a-b across prompt-visible A/B contexts.",
+  "models": [
+    "primary"
+  ],
+  "temperature": 0.0,
+  "prompt_template": "with_baseline_only_change_c",
+  "rule_location": "tool_description",
+  "parameter_order": [
+    "a",
+    "b",
+    "c"
+  ],
+  "run_order": "randomized",
+  "random_seed": 20260624,
+  "n_runs": 20,
+  "words": [
+    "",
+    "slightly",
+    "drastically"
+  ],
+  "conditions": [
+    "threshold_gte_1"
+  ],
+  "state_variants": [
+    "prompt_state_required"
+  ],
+  "contexts": [
+    {
+      "context_id": "ab_50_50_floor_00",
+      "a": 0.5,
+      "b": 0.5,
+      "c_grid": [
+        0.0,
+        0.01,
+        0.1,
+        0.25
+      ]
+    },
+    {
+      "context_id": "ab_50_15_floor_35",
+      "a": 0.5,
+      "b": 0.15,
+      "c_grid": [
+        0.25,
+        0.34,
+        0.35,
+        0.36,
+        0.5
+      ]
+    },
+    {
+      "context_id": "ab_30_15_floor_55",
+      "a": 0.3,
+      "b": 0.15,
+      "c_grid": [
+        0.45,
+        0.54,
+        0.55,
+        0.56,
+        0.7
+      ]
+    },
+    {
+      "context_id": "ab_30_05_floor_65",
+      "a": 0.3,
+      "b": 0.05,
+      "c_grid": [
+        0.55,
+        0.64,
+        0.65,
+        0.66,
+        0.8
+      ]
+    }
+  ],
+  "c_grid": [],
+  "result_file": "results/raw/experiment_d_threshold_ab_gradient_v1.jsonl"
+}

@@ -1,0 +1,46 @@
+{
+  "batch_id": "confounder_tool_parameter_naming_v1",
+  "description": "Confounder P: tool-name and parameter-name semantics. Full factorial over set_values/set_parameters and a,b,c/x,y,z.",
+  "models": [
+    "primary"
+  ],
+  "n_runs": 10,
+  "temperature": 0.0,
+  "words": [
+    "slightly"
+  ],
+  "conditions": [
+    "threshold_gte_1"
+  ],
+  "state_variants": [
+    "prompt_state_required"
+  ],
+  "contexts": [
+    {
+      "context_id": "ab_50_15",
+      "a": 0.5,
+      "b": 0.15
+    }
+  ],
+  "c_grid": [
+    0.25
+  ],
+  "prompt_template": "with_baseline_only_change_c",
+  "rule_location": "tool_description",
+  "parameter_order": [
+    "a",
+    "b",
+    "c"
+  ],
+  "run_order": "randomized",
+  "random_seed": 20260624,
+  "tool_name_variants": [
+    "set_values",
+    "set_parameters"
+  ],
+  "parameter_name_variants": [
+    "canonical_abc",
+    "generic_xyz"
+  ],
+  "result_file": "results/raw/confounder_tool_parameter_naming_v1.jsonl"
+}

@@ -1,0 +1,18 @@
+{
+  "batch_id": "phase0_calibration",
+  "description": "Tiny end-to-end calibration batch to verify tool calling, parsing, diagnostics, and resume behavior. Calibration only; not mechanism-identifying.",
+  "models": ["primary"],
+  "n_runs": 5,
+  "temperature": 0.0,
+  "word_set": "calibration",
+  "conditions": ["no_rule", "threshold_gte_1"],
+  "state_variants": ["prompt_state_required"],
+  "contexts": [
+    {"context_id": "ab_50_15", "a": 0.5, "b": 0.15}
+  ],
+  "c_grid": [0.25, 0.35],
+  "prompt_template": "with_baseline_only_change_c",
+  "rule_location": "tool_description",
+  "parameter_order": ["a", "b", "c"],
+  "result_file": "results/raw/phase0_calibration.jsonl"
+}

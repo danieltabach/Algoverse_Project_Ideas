@@ -162,7 +162,7 @@ results/summary/extended/experiment_k_full_word_scale_v1_summary.csv
 results/summary/extended/experiment_j_exact_instruction_control_v1_summary.csv
 ```
 
-## Hypotheses
+## Hypotheses (a lot of these are obvious)
 
 1. Adding a written relational rule such as `a+b+c >= 1.0` changes `c_output` relative to a matched no-rule interface.
 2. If the required minimum for `c` moves, model outputs move with it.
@@ -181,6 +181,8 @@ results/summary/extended/experiment_j_exact_instruction_control_v1_summary.csv
 | `src/llm_client.py` | OpenAI-compatible client wrapper for local Ollama model calls. |
 | `src/analysis.py` | CSV and grouped summary export. |
 | `configs/clean_core/` | Five clean-core experiment configs plus manifest. |
+| `configs/legacy/` | Historical A-L, confounder, and expansion configs preserved from earlier runs. |
+| `docs/EXPERIMENT_MENU.md` | Dense menu of every tested experiment family, with configs, summaries, questions, metrics, and guardrails. |
 | `results/summary/` | Clean-core summary CSVs from local runs. |
 | `results/summary/extended/` | Additional summary CSVs from earlier experiment families. |
 | `notebooks/clean_core_summary_analysis.ipynb` | Notebook for inspecting committed clean-core summary CSVs without raw JSONL outputs. |
@@ -188,6 +190,23 @@ results/summary/extended/experiment_j_exact_instruction_control_v1_summary.csv
 | `Dockerfile`, `docker-compose.yml` | Reproducible Python environment for running the package. |
 
 Raw JSONL outputs and logs are intentionally not committed.
+
+## Full Experiment Menu
+
+Use the dense menu when reviewing what has already been tested:
+
+```text
+docs/EXPERIMENT_MENU.md
+```
+
+That document is the authoritative map from research question to config file to summary result. It covers:
+
+- five clean-core v2 experiments,
+- historical A-L experiments,
+- state/source diagnostics,
+- naming, description, wording, rule-location, and parameter-order confounders,
+- exact-instruction, word-scale, and baseline-grid expansions,
+- diagnostic columns and interpretation guardrails.
 
 ## Clean-Core Experiments
 

@@ -1,0 +1,49 @@
+{
+  "batch_id": "experiment_b_independent_baseline_v1",
+  "description": "Experiment B: independent multi-parameter baseline with no relational rule. Includes open schema and symmetric tight-schema no-rule anchoring controls across A/B contexts.",
+  "models": [
+    "primary"
+  ],
+  "temperature": 0.0,
+  "prompt_template": "with_baseline_only_change_c",
+  "rule_location": "tool_description",
+  "parameter_order": [
+    "a",
+    "b",
+    "c"
+  ],
+  "run_order": "randomized",
+  "random_seed": 20260624,
+  "n_runs": 20,
+  "word_set": "minimal",
+  "conditions": [
+    "no_rule",
+    "schema_symmetric_tight_no_rule"
+  ],
+  "state_variants": [
+    "prompt_state_required"
+  ],
+  "contexts": [
+    {
+      "context_id": "ab_50_15",
+      "a": 0.5,
+      "b": 0.15
+    },
+    {
+      "context_id": "ab_50_50",
+      "a": 0.5,
+      "b": 0.5
+    },
+    {
+      "context_id": "ab_00_00",
+      "a": 0.0,
+      "b": 0.0
+    }
+  ],
+  "c_grid": [
+    0.25,
+    0.35,
+    0.5
+  ],
+  "result_file": "results/raw/experiment_b_independent_baseline_v1.jsonl"
+}

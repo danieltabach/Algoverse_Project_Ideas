@@ -1,0 +1,44 @@
+{
+  "batch_id": "experiment_e_threshold_no_rule_control_v1",
+  "description": "Experiment E: matched no-rule versus threshold control for ordinary numeric anchoring.",
+  "models": [
+    "primary"
+  ],
+  "temperature": 0.0,
+  "prompt_template": "with_baseline_only_change_c",
+  "rule_location": "tool_description",
+  "parameter_order": [
+    "a",
+    "b",
+    "c"
+  ],
+  "run_order": "randomized",
+  "random_seed": 20260624,
+  "n_runs": 20,
+  "word_set": "minimal",
+  "conditions": [
+    "no_rule",
+    "threshold_gte_1"
+  ],
+  "state_variants": [
+    "prompt_state_required"
+  ],
+  "contexts": [
+    {
+      "context_id": "ab_50_15",
+      "a": 0.5,
+      "b": 0.15
+    },
+    {
+      "context_id": "ab_30_15",
+      "a": 0.3,
+      "b": 0.15
+    }
+  ],
+  "c_grid": [
+    0.25,
+    0.35,
+    0.55
+  ],
+  "result_file": "results/raw/experiment_e_threshold_no_rule_control_v1.jsonl"
+}

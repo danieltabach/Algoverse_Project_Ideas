@@ -1,0 +1,44 @@
+{
+  "batch_id": "confounder_rule_wording_v1",
+  "description": "Confounder 9: threshold rule wording strength using default, soft, must, and symbolic variants.",
+  "models": [
+    "primary"
+  ],
+  "n_runs": 10,
+  "temperature": 0.0,
+  "words": [
+    "slightly"
+  ],
+  "conditions": [
+    "threshold_gte_1"
+  ],
+  "state_variants": [
+    "prompt_state_required"
+  ],
+  "contexts": [
+    {
+      "context_id": "ab_50_15",
+      "a": 0.5,
+      "b": 0.15
+    }
+  ],
+  "c_grid": [
+    0.25
+  ],
+  "prompt_template": "with_baseline_only_change_c",
+  "rule_location": "tool_description",
+  "parameter_order": [
+    "a",
+    "b",
+    "c"
+  ],
+  "run_order": "randomized",
+  "random_seed": 20260624,
+  "rule_wording_variants": [
+    "default",
+    "soft",
+    "must",
+    "symbolic"
+  ],
+  "result_file": "results/raw/confounder_rule_wording_v1.jsonl"
+}

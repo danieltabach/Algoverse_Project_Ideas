@@ -1,0 +1,34 @@
+{
+  "menu_id": "numeric_tool_interface_legacy_menu_v1",
+  "description": "Historical and extended numeric tool-interface configs preserved from the original Paper 2 experiment menu. Start with configs/clean_core/manifest_v2.json for first-readout interpretation, then use this menu for continuity and confounder checks.",
+  "recommended_order": [
+    "configs/legacy/phase0_calibration.json",
+    "configs/legacy/confounder_state_representation_v1.json",
+    "configs/legacy/mechanism_identification_v1_light.json",
+    "configs/legacy/threshold_boundary_v1_light.json",
+    "configs/legacy/experiment_b_independent_baseline_v1.json",
+    "configs/legacy/experiment_e_threshold_no_rule_control_v1.json",
+    "configs/legacy/experiment_d_threshold_ab_gradient_v1.json",
+    "configs/legacy/experiment_f_schema_bound_threshold_v1.json",
+    "configs/legacy/experiment_g_conservation_stress_v1.json",
+    "configs/legacy/experiment_h_prompt_placement_ablation_v1.json",
+    "configs/legacy/experiment_i_parameter_order_control_v1.json",
+    "configs/legacy/experiment_j_exact_instruction_control_v1.json",
+    "configs/legacy/experiment_k_full_word_scale_v1.json",
+    "configs/legacy/experiment_l_full_baseline_grid_v1.json"
+  ],
+  "confounder_configs": [
+    "configs/legacy/confounder_state_representation_v1.json",
+    "configs/legacy/experiment_h_prompt_placement_ablation_v1.json",
+    "configs/legacy/experiment_i_parameter_order_control_v1.json",
+    "configs/legacy/confounder_tool_parameter_naming_v1.json",
+    "configs/legacy/confounder_parameter_descriptions_v1.json",
+    "configs/legacy/confounder_rule_wording_v1.json",
+    "configs/legacy/confounder_bare_knob_bridge_v1.json"
+  ],
+  "notes": [
+    "Do not interpret aligned .50/.15 -> .35 cells as schema-propagation evidence.",
+    "Run the clean-core v2 menu first for primary interpretation.",
+    "Legacy configs are retained so historical summary files remain runnable and understandable."
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "batch_id": "experiment_j_exact_instruction_control_v1",
+  "description": "Experiment J: exact numeric instruction control using increase-by-.10 and set-c-to-.40 prompts.",
+  "models": [
+    "primary"
+  ],
+  "temperature": 0.0,
+  "prompt_template": "with_baseline_only_change_c",
+  "rule_location": "tool_description",
+  "parameter_order": [
+    "a",
+    "b",
+    "c"
+  ],
+  "run_order": "randomized",
+  "random_seed": 20260624,
+  "n_runs": 10,
+  "words": [
+    ""
+  ],
+  "conditions": [
+    "no_rule",
+    "threshold_gte_1"
+  ],
+  "state_variants": [
+    "prompt_state_required"
+  ],
+  "prompt_templates": [
+    "exact_increase_c_by_0_10",
+    "exact_set_c_0_40"
+  ],
+  "contexts": [
+    {
+      "context_id": "ab_50_15",
+      "a": 0.5,
+      "b": 0.15
+    }
+  ],
+  "c_grid": [
+    0.25,
+    0.35
+  ],
+  "result_file": "results/raw/experiment_j_exact_instruction_control_v1.jsonl"
+}

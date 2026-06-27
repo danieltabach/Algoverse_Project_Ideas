@@ -1,0 +1,57 @@
+{
+  "batch_id": "experiment_i_parameter_order_control_v1",
+  "description": "Experiment I: parameter order control for threshold and equality conditions.",
+  "models": [
+    "primary"
+  ],
+  "temperature": 0.0,
+  "prompt_template": "with_baseline_only_change_c",
+  "rule_location": "tool_description",
+  "parameter_order": [
+    "a",
+    "b",
+    "c"
+  ],
+  "run_order": "randomized",
+  "random_seed": 20260624,
+  "n_runs": 10,
+  "words": [
+    "slightly"
+  ],
+  "conditions": [
+    "threshold_gte_1",
+    "equality_eq_1"
+  ],
+  "state_variants": [
+    "prompt_state_required"
+  ],
+  "parameter_orders": [
+    [
+      "a",
+      "b",
+      "c"
+    ],
+    [
+      "c",
+      "a",
+      "b"
+    ],
+    [
+      "b",
+      "a",
+      "c"
+    ]
+  ],
+  "contexts": [
+    {
+      "context_id": "ab_50_15",
+      "a": 0.5,
+      "b": 0.15
+    }
+  ],
+  "c_grid": [
+    0.25,
+    0.35
+  ],
+  "result_file": "results/raw/experiment_i_parameter_order_control_v1.jsonl"
+}

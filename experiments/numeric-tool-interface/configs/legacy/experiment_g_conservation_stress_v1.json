@@ -1,0 +1,44 @@
+{
+  "batch_id": "experiment_g_conservation_stress_v1",
+  "description": "Experiment G: conservation stress test comparing no-rule, threshold, and exact equality behavior when increasing C conflicts with a+b+c=1.",
+  "models": [
+    "primary"
+  ],
+  "temperature": 0.0,
+  "prompt_template": "with_baseline_only_change_c",
+  "rule_location": "tool_description",
+  "parameter_order": [
+    "a",
+    "b",
+    "c"
+  ],
+  "run_order": "randomized",
+  "random_seed": 20260624,
+  "n_runs": 30,
+  "words": [
+    "",
+    "slightly",
+    "drastically"
+  ],
+  "conditions": [
+    "no_rule",
+    "threshold_gte_1",
+    "equality_eq_1"
+  ],
+  "state_variants": [
+    "prompt_state_required"
+  ],
+  "contexts": [
+    {
+      "context_id": "ab_50_15",
+      "a": 0.5,
+      "b": 0.15
+    }
+  ],
+  "c_grid": [
+    0.35,
+    0.5,
+    0.9
+  ],
+  "result_file": "results/raw/experiment_g_conservation_stress_v1.jsonl"
+}

@@ -1,0 +1,19 @@
+{
+  "batch_id": "threshold_boundary_v1_light",
+  "description": "Light current-state threshold batch: no-rule versus a+b+c>=1. Includes aligned ab=.50/.15 and divergent current-state ab=.30/.15. This tests prompt/current-state floor behavior, not schema-bound propagation by itself.",
+  "models": ["primary"],
+  "n_runs": 10,
+  "temperature": 0.0,
+  "word_set": "minimal",
+  "conditions": ["no_rule", "threshold_gte_1"],
+  "state_variants": ["prompt_state_required"],
+  "contexts": [
+    {"context_id": "ab_50_15", "a": 0.5, "b": 0.15},
+    {"context_id": "ab_30_15", "a": 0.3, "b": 0.15}
+  ],
+  "c_grid": [0.0, 0.1, 0.25, 0.34, 0.35, 0.36, 0.5, 0.54, 0.55, 0.56, 0.9],
+  "prompt_template": "with_baseline_only_change_c",
+  "rule_location": "tool_description",
+  "parameter_order": ["a", "b", "c"],
+  "result_file": "results/raw/threshold_boundary_v1_light.jsonl"
+}
