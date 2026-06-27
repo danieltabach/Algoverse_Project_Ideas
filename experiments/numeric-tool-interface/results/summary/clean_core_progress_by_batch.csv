@@ -1,0 +1,6 @@
+batch_id,batch_label,menu_order,result_file,total_calls,resume_completed,pending,records,errors,abstentions,tool_calls,schema_invalid,threshold_invalid,decode_errors,last_result_update,progress_pct
+clean_core_threshold_boundary_v2,Clean 1. Total Requirement Changes C?,1,results\raw\clean_core_threshold_boundary_v2.jsonl,45000,21746,23254,21746,0,2242,19504,2242,3036,0,2026-06-26T10:15:40,48.324444444444445
+clean_core_floor_gradient_v2,Clean 2. Required C Minimum Moves,2,results\raw\clean_core_floor_gradient_v2.jsonl,15000,6000,9000,6000,0,622,5378,622,504,0,2026-06-26T06:41:23,40.0
+clean_core_mechanism_split_v2,Clean 3. Prompt Values vs Tool Schema,3,results\raw\clean_core_mechanism_split_v2.jsonl,16000,6400,9600,6400,0,396,6004,400,3119,0,2026-06-26T07:15:05,40.0
+clean_core_schema_only_v2,Clean 4. Tool Schema Alone,4,results\raw\clean_core_schema_only_v2.jsonl,4500,1800,2700,1800,0,300,1500,500,1000,0,2026-06-26T07:23:28,40.0
+clean_core_rule_location_v2,Clean 5. Where Requirement Is Written,5,results\raw\clean_core_rule_location_v2.jsonl,2000,800,1200,800,0,300,500,300,500,0,2026-06-26T07:28:23,40.0

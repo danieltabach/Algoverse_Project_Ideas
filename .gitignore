@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Local secrets and editor state
+.env
+.env.*
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Generated experiment outputs
+**/logs/
+**/outputs/
+**/results/raw/
+**/*.jsonl
+**/*.log
+
+# Large/local notebooks and scratch exports
+**/.ipynb_checkpoints/
+scratch/
+tmp/
+

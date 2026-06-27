@@ -1,0 +1,18 @@
+{
+  "menu_id": "paper2_clean_core_v2",
+  "description": "Clean core v2 menu. Designed to avoid aligned-floor confusion in initial interpretation.",
+  "recommended_order": [
+    "configs/clean_core/clean_core_threshold_boundary_v2.json",
+    "configs/clean_core/clean_core_floor_gradient_v2.json",
+    "configs/clean_core/clean_core_mechanism_split_v2.json",
+    "configs/clean_core/clean_core_schema_only_v2.json",
+    "configs/clean_core/clean_core_rule_location_v2.json"
+  ],
+  "notes": [
+    "No aligned midpoint calibration cell in the clean core.",
+    "Current-state floors are .31, .46, and .61.",
+    "Mechanism split uses prompt floor .60 versus schema floor .39.",
+    "Core mechanism tests omit drastically because the first pilot showed out-of-range artifacts.",
+    "Schema-bound clean conditions use explicit registry bounds a<=.43 and b<=.18."
+  ]
+}

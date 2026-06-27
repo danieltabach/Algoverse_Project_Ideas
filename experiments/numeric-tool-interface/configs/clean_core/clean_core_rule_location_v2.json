@@ -1,0 +1,45 @@
+{
+  "models": [
+    "primary"
+  ],
+  "temperature": 0.0,
+  "prompt_template": "with_baseline_only_change_c",
+  "rule_location": "tool_description",
+  "parameter_order": [
+    "a",
+    "b",
+    "c"
+  ],
+  "run_order": "randomized",
+  "random_seed": 20260626,
+  "batch_id": "clean_core_rule_location_v2",
+  "description": "Clean v2 rule-location check. Same asymmetric prompt state, same floor .46, threshold rule placed in tool description, user prompt, both, or neither.",
+  "n_runs": 10,
+  "words": [
+    "slightly"
+  ],
+  "conditions": [
+    "threshold_gte_1"
+  ],
+  "state_variants": [
+    "prompt_state_required"
+  ],
+  "contexts": [
+    {
+      "context_id": "clean_ab_31_23_floor_46",
+      "a": 0.31,
+      "b": 0.23,
+      "c_grid": [
+        0.36
+      ]
+    }
+  ],
+  "c_grid": [],
+  "rule_locations": [
+    "tool_description",
+    "user_prompt",
+    "both",
+    "none"
+  ],
+  "result_file": "results/raw/clean_core_rule_location_v2.jsonl"
+}

@@ -1,0 +1,70 @@
+{
+  "models": [
+    "primary"
+  ],
+  "temperature": 0.0,
+  "prompt_template": "with_baseline_only_change_c",
+  "rule_location": "tool_description",
+  "parameter_order": [
+    "a",
+    "b",
+    "c"
+  ],
+  "run_order": "randomized",
+  "random_seed": 20260626,
+  "batch_id": "clean_core_mechanism_split_v2",
+  "description": "Clean v2 mechanism split. No aligned midpoint cell. Prompt current values imply c floor .60 while schema bounds imply .39; schema-only leg tests metadata without prompt state.",
+  "n_runs": 10,
+  "words": [
+    "",
+    "slightly"
+  ],
+  "conditions": [
+    "schema_clean43_18_threshold",
+    "schema_clean43_18_no_rule"
+  ],
+  "state_variants": [
+    "prompt_state_required",
+    "no_state_required"
+  ],
+  "contexts": [
+    {
+      "context_id": "clean_divergent_schema43_18_current24_16",
+      "allowed_state_variants": [
+        "prompt_state_required"
+      ],
+      "a": 0.24,
+      "b": 0.16,
+      "expected_context_floor": 0.6,
+      "expected_schema_floor": 0.39,
+      "mechanism_identifiable": true,
+      "c_grid": [
+        0.3,
+        0.38,
+        0.39,
+        0.4,
+        0.59,
+        0.6,
+        0.61
+      ]
+    },
+    {
+      "context_id": "clean_schema_only_schema43_18",
+      "allowed_state_variants": [
+        "no_state_required"
+      ],
+      "a": null,
+      "b": null,
+      "c": null,
+      "expected_context_floor": null,
+      "expected_schema_floor": 0.39,
+      "mechanism_identifiable": true,
+      "c_grid": [
+        null
+      ]
+    }
+  ],
+  "c_grid": [],
+  "result_file": "results/raw/clean_core_mechanism_split_v2.jsonl",
+  "analysis_note": "Interpret prompt-state outputs near .60 as current-state arithmetic and outputs near .39 as schema-bound behavior. There is intentionally no aligned calibration cell."
+}

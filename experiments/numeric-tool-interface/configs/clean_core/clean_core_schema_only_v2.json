@@ -1,0 +1,47 @@
+{
+  "models": [
+    "primary"
+  ],
+  "temperature": 0.0,
+  "prompt_template": "no_baseline",
+  "rule_location": "tool_description",
+  "parameter_order": [
+    "a",
+    "b",
+    "c"
+  ],
+  "run_order": "randomized",
+  "random_seed": 20260626,
+  "batch_id": "clean_core_schema_only_v2",
+  "description": "Clean v2 schema-only mechanism test. No prompt A/B/C values. Separates rule text only, tight schema only, and tight schema plus rule using schema floor .39.",
+  "n_runs": 10,
+  "words": [
+    "",
+    "slightly",
+    "moderately"
+  ],
+  "conditions": [
+    "schema_open_threshold",
+    "schema_clean43_18_threshold",
+    "schema_clean43_18_no_rule"
+  ],
+  "state_variants": [
+    "no_state_required"
+  ],
+  "contexts": [
+    {
+      "context_id": "clean_schema_only_schema43_18",
+      "a": null,
+      "b": null,
+      "c": null,
+      "c_grid": [
+        null
+      ],
+      "expected_schema_floor": 0.39
+    }
+  ],
+  "c_grid": [
+    null
+  ],
+  "result_file": "results/raw/clean_core_schema_only_v2.jsonl"
+}

@@ -1,0 +1,70 @@
+{
+  "models": [
+    "primary"
+  ],
+  "temperature": 0.0,
+  "prompt_template": "with_baseline_only_change_c",
+  "rule_location": "tool_description",
+  "parameter_order": [
+    "a",
+    "b",
+    "c"
+  ],
+  "run_order": "randomized",
+  "random_seed": 20260626,
+  "batch_id": "clean_core_threshold_boundary_v2",
+  "description": "Clean v2 current-state threshold test. Uses asymmetric A/B contexts with no aligned midpoint calibration cell. Tests no-rule versus a+b+c>=1 around floors .31, .46, and .61.",
+  "n_runs": 10,
+  "words": [
+    "",
+    "slightly",
+    "moderately"
+  ],
+  "conditions": [
+    "no_rule",
+    "threshold_gte_1"
+  ],
+  "state_variants": [
+    "prompt_state_required"
+  ],
+  "contexts": [
+    {
+      "context_id": "clean_ab_41_28_floor_31",
+      "a": 0.41,
+      "b": 0.28,
+      "c_grid": [
+        0.21,
+        0.3,
+        0.31,
+        0.32,
+        0.41
+      ]
+    },
+    {
+      "context_id": "clean_ab_31_23_floor_46",
+      "a": 0.31,
+      "b": 0.23,
+      "c_grid": [
+        0.36,
+        0.45,
+        0.46,
+        0.47,
+        0.56
+      ]
+    },
+    {
+      "context_id": "clean_ab_22_17_floor_61",
+      "a": 0.22,
+      "b": 0.17,
+      "c_grid": [
+        0.51,
+        0.6,
+        0.61,
+        0.62,
+        0.71
+      ]
+    }
+  ],
+  "c_grid": [],
+  "result_file": "results/raw/clean_core_threshold_boundary_v2.jsonl"
+}
