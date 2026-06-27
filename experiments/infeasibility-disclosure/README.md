@@ -246,9 +246,9 @@ data/
 
 The implementation should keep the oracle deterministic and auditable. Avoid using an LLM judge as the primary grader for the main result.
 
-## Why This Can Still Fit A Safety PI
+## Safety And Evaluation Relevance
 
-This is not mechanistic interpretability, but it is still a safety-relevant empirical evaluation.
+This is a safety-relevant empirical evaluation of agentic tool use under negative evidence. The main contribution is behavioral and benchmark-oriented: it measures whether an agent can discover that a target is infeasible, stop at a justified point, and disclose that result in a stakeholder-facing report.
 
 The safety angle is:
 
@@ -258,14 +258,14 @@ The safety angle is:
 - monitorability through tool traces,
 - evaluation-awareness as a confound.
 
-If the PI wants a more mechanistic hook, add lightweight internal or behavioral probes after the main benchmark works:
+Optional extensions after the main benchmark is working:
 
 - Compare operational vs evaluation-aware prompts.
-- Inspect whether refusal/disclosure language increases after certain trace patterns.
-- Test whether models enter a "keep trying" attractor state under pressure.
-- Use open models later for activation analysis around stopping/disclosure decisions.
+- Inspect whether disclosure language increases after specific trace patterns.
+- Test whether pressure creates persistent over-search after infeasibility is established.
+- Use open models for activation or representation analysis around stopping and disclosure decisions.
 
-But the first paper should be a clean benchmark and behavioral study, not a half-built mech-interp paper.
+The first version should prioritize a clean benchmark and behavioral study. Mechanistic analysis can be added later if the behavioral effect is reliable.
 
 ## Related Work To Read First
 
