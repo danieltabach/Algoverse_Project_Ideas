@@ -93,6 +93,7 @@ Current status:
 
 - Research design/specification only.
 - Implementation not started.
+- ATLAS-mini scope memo added for a production-style optimization audit version.
 - Key design variables identified: tool-call budget, context preservation, stopping behavior, pressure, and disclosure conditional on evidence.
 
 Folder:

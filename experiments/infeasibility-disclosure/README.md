@@ -32,6 +32,16 @@ Concrete experiments:
 4. **Pressure effect:** Does leadership pressure change tool-call allocation, stopping behavior, or final disclosure?
 5. **Context preservation:** Does disclosure depend on whether prior tool results remain in full context, are summarized, or must be recalled from a trace?
 
+## ATLAS-Mini Scope Memo
+
+A more concrete version of this project is scoped here:
+
+```text
+docs/ATLAS_MINI_AUDIT_SCOPE.md
+```
+
+That memo frames the benchmark as a small ATLAS-style resource-allocation audit environment: a deterministic solver/oracle, stakeholder requirements where all constraints are jointly infeasible, bounded tool calls, and final-report grading for infeasibility disclosure.
+
 ## Why This Is A Distinct Experiment
 
 Existing agent and safety benchmarks often study direct constraint violations, broad tool-use success, hallucination, sycophancy, or one-shot refusal behavior. This benchmark targets a narrower mechanism:
